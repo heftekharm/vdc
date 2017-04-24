@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">VDC</string>
+    <string name="action_settings">Settings</string>
+    <string name="fname">نام</string>
+    <string name="lname">نام خانوادگی</string>
+    <string name="age">سن</string>
+    <string name="education">تحصیلات</string>
+    <string name="organization">سازمان</string>
+    <string name="job">محل کار</string>
+    <string name="phoneNumber">شماره تلفن</string>
+    <string name="remove">حذف</string>
+    <string name="add">اضافه</string>
+    <string name="correct">تصحیح</string>
+</resources>
