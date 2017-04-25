@@ -12,13 +12,13 @@ import com.orm.dsl.Table;
 public class Person extends BaseObservable {
     //final String add="اضافه",update="تصحیح", remove="حذف";
     private long dbId =-1;
-    private String fname="نام";
-    private String lname="نام خانوادگی";
-    private String age="سن";
-    private String edu="تحصیلات";
-    private String organ="سازمان";
-    private String job="شغل";
-    private String phone="شماره تلفن";
+    private String fname="";
+    private String lname="";
+    private String age="";
+    private String edu="";
+    private String organ="";
+    private String job="";
+    private String phone="";
 
     @Bindable
     public String getFname() {
