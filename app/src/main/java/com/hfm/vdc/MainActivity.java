@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void writeExcel(){
         boolean grant=checkWritingPermission(REQUEST_TO_WRITE_EXCEL_FILE);
-        if (grant) Exceler.WriteExcel(MainActivity.this);
+        if (grant) Exceler.WriteExcel();
     }
     private void setDataOnPerson(){
         person.setFname(binding.editTextFname.getText().toString());
@@ -58,22 +58,22 @@ public class MainActivity extends AppCompatActivity {
     }
     public void add(View v){
         setDataOnPerson();
-        Pers pers =new Pers(person);
-        pers.save();
-        Toast.makeText(this, pers.getId().toString(),Toast.LENGTH_SHORT).show();
+        SugarPerson sugarPerson =new SugarPerson(person);
+        sugarPerson.save();
+        Toast.makeText(this, sugarPerson.getId().toString(),Toast.LENGTH_SHORT).show();
     }
     public void correct(View v){
         setDataOnPerson();
-        Pers pers =new Pers(person);
-        pers.setId(person.getDbId());
-        pers.save();
+        SugarPerson sugarPerson =new SugarPerson(person);
+        sugarPerson.setId(person.getDbId());
+        sugarPerson.save();
     }
     public void remove(View v){
 
     }
     public void clear(View v){
         //Exceler.WriteExcel();
-       //Toast.makeText(this, Pers.listAll(Pers.class).size(),Toast.LENGTH_SHORT).show();
+       //Toast.makeText(this, SugarPerson.listAll(SugarPerson.class).size(),Toast.LENGTH_SHORT).show();
 
     }
     private final int REQUEST_TO_WRITE_EXCEL_FILE=2017;

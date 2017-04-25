@@ -9,7 +9,7 @@ import com.orm.dsl.Table;
  * Created by Hosein on 4/24/2017.
  */
 @Table
-public class Pers extends SugarRecord {
+public class SugarPerson extends SugarRecord {
     public String fname;
     public String lname;
     public String age;
@@ -18,9 +18,9 @@ public class Pers extends SugarRecord {
     public String job;
     public String phone;
 
-    public Pers(){
+    public SugarPerson(){
     }
-    public Pers(Person person){
+    public SugarPerson(Person person){
         fname=person.getFname();
         lname=person.getLname();
         age=person.getAge();
