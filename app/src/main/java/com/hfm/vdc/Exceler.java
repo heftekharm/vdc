@@ -1,6 +1,8 @@
 package com.hfm.vdc;
 
+import android.content.Context;
 import android.os.Environment;
+import android.widget.Toast;
 
 import com.orm.SugarRecord;
 
@@ -22,7 +24,7 @@ import jxl.write.biff.RowsExceededException;
  */
 public class Exceler  {
 
-    public  static void WriteExcel(){
+    public  static boolean WriteExcel(Context context){
         Iterator<SugarPerson> iterator=SugarPerson.findAll(SugarPerson.class);
         try {
             File savePathFile=new File(Environment.getExternalStorageDirectory(),"visitors.xls");
@@ -44,13 +46,21 @@ public class Exceler  {
             }
             writableWorkbook.write();
             writableWorkbook.close();
+            Toast.makeText(context,new StringBuilder("Successfully Generated At:").append(savePathFile.getCanonicalPath()),Toast.LENGTH_LONG).show();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(context,new StringBuilder("Something Went Wrong!"),Toast.LENGTH_LONG).show();
         } catch (RowsExceededException e) {
             e.printStackTrace();
+            Toast.makeText(context,new StringBuilder("Something Went Wrong!"),Toast.LENGTH_LONG).show();
         } catch (WriteException e) {
             e.printStackTrace();
+            Toast.makeText(context,new StringBuilder("Something Went Wrong!"),Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            Toast.makeText(context,new StringBuilder("Something Went Wrong!"),Toast.LENGTH_LONG).show();
         }
+        return false;
     }
 
 }

@@ -20,6 +20,11 @@ public class Person extends BaseObservable {
     private String job="";
     private String phone="";
 
+    public void clear(){
+        fname=lname=age=edu=organ=job=phone="";
+        dbId=-1;
+        notifyChange();
+    }
     @Bindable
     public String getFname() {
         return fname;
@@ -100,6 +105,19 @@ public class Person extends BaseObservable {
     public void setDbId(long dbId) {
         this.dbId = dbId;
         notifyPropertyChanged(BR.dbId);
+
+    }
+    public void chageFieldsBySugarPerson(SugarPerson sugarPerson){
+
+        edu=sugarPerson.edu;
+        lname=sugarPerson.lname;
+        dbId=sugarPerson.getId();
+        fname=sugarPerson.fname;
+        job=sugarPerson.job;
+        age=sugarPerson.age;
+        organ=sugarPerson.organ;
+        phone=sugarPerson.phone;
+        notifyChange();
 
     }
 

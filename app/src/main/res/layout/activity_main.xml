@@ -132,16 +132,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add"
+            android:drawableLeft="@android:drawable/ic_menu_add"
             android:id="@+id/button_add"
             android:layout_below="@+id/editText_phone"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <Button
+            android:enabled="@{person.dbId !=-1 ? true : false}"
             android:onClick="remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/remove"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
             android:id="@+id/button_remove"
             android:layout_below="@+id/editText_phone"
             android:layout_toLeftOf="@+id/button_add"
@@ -153,6 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/correct"
+            android:drawableLeft="@android:drawable/ic_menu_edit"
             android:id="@+id/button_correct"
             android:layout_below="@+id/editText_phone"
             android:layout_toLeftOf="@+id/button_remove"
@@ -160,12 +164,12 @@
 
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/save_as_excel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/stat_notify_sync" />
+        android:src="@drawable/menu" />
 
 </android.support.design.widget.CoordinatorLayout>
 </layout>
