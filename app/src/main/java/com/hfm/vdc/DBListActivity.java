@@ -20,51 +20,18 @@ import java.util.List;
 import co.dift.ui.SwipeToAction;
 
 public class DBListActivity extends AppCompatActivity {
-    SwipeToAction swipeToAction;
-    Adapter adapter=new Adapter(SugarPerson.listAll(SugarPerson.class));
+    Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dblist);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        RecyclerView dataListRecycleView= (RecyclerView) findViewById(R.id.recycleView_datalist);
+        final RecyclerView dataListRecycleView= (RecyclerView) findViewById(R.id.recycleView_datalist);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         dataListRecycleView.setLayoutManager(linearLayoutManager);
         dataListRecycleView.setHasFixedSize(true);
-        List x=SugarPerson.listAll(SugarPerson.class);
-        final Adapter adapter=new Adapter(SugarPerson.listAll(SugarPerson.class));
-        dataListRecycleView.setAdapter(adapter);
-        swipeToAction=new SwipeToAction(dataListRecycleView, new SwipeToAction.SwipeListener<Integer>() {
-            @Override
-            public boolean swipeLeft(Integer pos) {
-                adapter.removeItem(pos);
-                return false;
-            }
-
-            @Override
-            public boolean swipeRight(Integer pos) {
-                Intent intent=new Intent();
-                long id=adapter.getItemId(pos);
-                intent.putExtra(Statics.ITEM_ID_RETURNED_BY_SWIPE_RIGHT,id);
-                setResult(Activity.RESULT_OK,intent);
-                finish();
-                return true;
-            }
-
-            @Override
-            public void onClick(Integer itemData) {
-
-            }
-
-            @Override
-            public void onLongClick(Integer itemData) {
-
-            }
-
-
-        });
-
+        new AsyncTaskLoadingFromDB(this,dataListRecycleView).execute();
         FloatingActionButton save_as_excel = (FloatingActionButton) findViewById(R.id.save_as_excel);
         save_as_excel.setOnClickListener(new View.OnClickListener() {
             @Override

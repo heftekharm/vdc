@@ -1,5 +1,6 @@
 package com.hfm.vdc;
 
+import android.os.Process;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,9 +58,12 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return dataList.size();
     }
     public void removeItem(Integer pos){
-        SugarPerson sugarPerson= dataList.get(pos);
+        final SugarPerson sugarPerson= dataList.get(pos);
         dataList.remove(pos.intValue());
         notifyItemRemoved(pos);
+        deleteFromDB(sugarPerson);
+    }
+    private synchronized void deleteFromDB(SugarPerson sugarPerson){
         sugarPerson.delete();
     }
 
