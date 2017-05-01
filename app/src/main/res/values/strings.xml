@@ -10,7 +10,8 @@
     <string name="phoneNumber">شماره تلفن</string>
     <string name="remove">حذف</string>
     <string name="add">اضافه</string>
-    <string name="correct">تصحیح</string>
+    <string name="edit"> ویرایش </string>
+    <string name="correct">ثبت تغییرات</string>
     <string name="title_activity_dbcontent"> پایگاه داده </string>
 
 </resources>

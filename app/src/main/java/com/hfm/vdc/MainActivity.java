@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
@@ -38,6 +39,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,Statics.REQ_RECORD_ID);
             }
         });
+        ((AppCompatButton)findViewById(R.id.button_correct)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                correct(v);
+            }
+        });
+
+        ((AppCompatButton)findViewById(R.id.button_add)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add(v);
+            }
+        });
+
+            ((AppCompatButton)findViewById(R.id.button_remove)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    remove(v);
+                }
+            });
+
     }
 
     private void setDataOnPerson(){

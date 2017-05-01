@@ -127,47 +127,45 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-        <Button
-            android:onClick="add"
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add"
-            android:drawableLeft="@android:drawable/ic_menu_add"
+            android:drawableLeft="@drawable/ic_add_black"
             android:id="@+id/button_add"
             android:layout_below="@+id/editText_phone"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-        <Button
-            android:enabled="@{person.dbId !=-1 ? true : false}"
-            android:onClick="remove"
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/remove"
-            android:drawableLeft="@android:drawable/ic_menu_delete"
+            android:drawableLeft="@drawable/ic_delete"
             android:id="@+id/button_remove"
             android:layout_below="@+id/editText_phone"
             android:layout_toLeftOf="@+id/button_add"
             android:layout_toStartOf="@+id/button_add" />
 
-        <Button
-            android:enabled="@{person.dbId !=-1 ? true : false}"
-            android:onClick="correct"
+        <android.support.v7.widget.AppCompatButton
+            android:drawableLeft="@drawable/ic_save_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/correct"
-            android:drawableLeft="@android:drawable/ic_menu_edit"
             android:id="@+id/button_correct"
             android:layout_below="@+id/editText_phone"
             android:layout_toLeftOf="@+id/button_remove"
-            android:layout_toStartOf="@+id/button_remove" />
+            android:layout_toStartOf="@+id/button_remove"
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_as_excel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|left"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/menu" />
 

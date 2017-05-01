@@ -1,69 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="110dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="72dp"
     >
-    <RelativeLayout
-        android:tag="reveal-right"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingRight="16dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/mode_edit"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:tag="reveal-left"
-        android:background="@color/delete"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingRight="16dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_delete"
-            />
-    </RelativeLayout>
+        <RelativeLayout
+            android:visibility="visible"
+            android:tag="front"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            >
+            <ImageView
+                android:id="@+id/item_front_icon"
+                android:src="@drawable/item_icon"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="12dp"
+                android:paddingRight="72dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_name"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:textSize="18sp"
+                tools:text="Name"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                >
 
-    <RelativeLayout
-        android:tag="front"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingRight="16dp"
-        >
-        <ImageView
-            android:id="@+id/item_front_icon"
-            android:src="@drawable/item_icon"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:paddingRight="72dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/item_name"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:textSize="18sp"
-            tools:text="Name"
-            />
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/list_item_delete"
+                    android:text="@string/remove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:borderlessButtonStyle"
+                    android:layout_weight="1"
+                    />
 
-    </RelativeLayout>
+                <android.support.v7.widget.AppCompatButton
+                    android:layout_weight="1"
+                    android:id="@+id/list_item_edit"
+                    android:text="@string/edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:borderlessButtonStyle"/>
+
+            </LinearLayout>
 
 
-</FrameLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 

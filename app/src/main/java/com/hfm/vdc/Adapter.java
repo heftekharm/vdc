@@ -1,10 +1,13 @@
 package com.hfm.vdc;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Process;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,21 +19,26 @@ import co.dift.ui.SwipeToAction;
 /**
  * Created by Hosein on 4/25/2017.
  */
-public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     ArrayList<SugarPerson> dataList;
+    Activity activity;
     //List<SugarPerson> dataList;
-    class Holder extends SwipeToAction.ViewHolder<Integer>{
+    class Holder extends RecyclerView.ViewHolder{
         TextView nameTextView;
+        Button deleteButton;
+        Button editButton;
         ImageView iconImageView;
         public Holder(View v) {
             super(v);
             nameTextView= (TextView) v.findViewById(R.id.item_name);
+            deleteButton= (Button) v.findViewById(R.id.list_item_delete);
+            editButton= (Button) v.findViewById(R.id.list_item_edit);
         }
     }
 
-    public Adapter(List<SugarPerson> dataList){
-        //this.dataList=dataList;
+    public Adapter(List<SugarPerson> dataList,Activity activity){
         this.dataList=new ArrayList(dataList);
+        this.activity=activity;
     }
 
     @Override
@@ -49,7 +57,9 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         SugarPerson sugarPerson=dataList.get(position);
         Holder hldr=(Holder)holder;
         hldr.nameTextView.setText(new StringBuilder(sugarPerson.fname).append(' ').append(sugarPerson.lname));
-        hldr.data=position;
+        hldr.deleteButton.setOnClickListener(new ClickListener(DEL,position));
+        hldr.editButton.setOnClickListener(new ClickListener(EDIT,position));
+
 
     }
 
@@ -70,5 +80,34 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public long getItemId(int position) {
         return dataList.get(position).getId(); //super.getItemId(position);
+    }
+
+    public final static int EDIT=10;
+    public final static int  DEL=11;
+    class ClickListener implements Button.OnClickListener{
+        private int action;
+        private int pos;
+        public ClickListener(int action,int pos){
+            this.action=action;
+            this.pos=pos;
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (action){
+                case EDIT:{
+                    Intent intent=new Intent();
+                    long id=getItemId(pos);
+                    intent.putExtra(Statics.ITEM_ID_RETURNED_BY_SWIPE_RIGHT,id);
+                    activity.setResult(Activity.RESULT_OK,intent);
+                    activity.finish();
+                    break;
+                }
+                case DEL:{
+                    removeItem(pos);
+                }
+
+            }
+        }
     }
 }

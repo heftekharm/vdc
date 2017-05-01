@@ -37,11 +37,11 @@ public class AsyncTaskLoadingFromDB extends android.os.AsyncTask<Void,Void,List>
     @Override
     protected void onPostExecute(List list) {
         super.onPostExecute(list);
-        final Adapter adapter=new Adapter(list);
+        final Adapter adapter=new Adapter(list,activity);
         dataListRecycleView.setAdapter(adapter);
         activity.findViewById(R.id.progressbar).setVisibility(View.GONE);
         dataListRecycleView.setVisibility(View.VISIBLE);
-        SwipeToAction swipeToAction=new SwipeToAction(dataListRecycleView, new SwipeToAction.SwipeListener<Integer>() {
+/*        SwipeToAction swipeToAction=new SwipeToAction(dataListRecycleView, new SwipeToAction.SwipeListener<Integer>() {
             @Override
             public boolean swipeLeft(Integer pos) {
                 adapter.removeItem(pos);
@@ -69,6 +69,6 @@ public class AsyncTaskLoadingFromDB extends android.os.AsyncTask<Void,Void,List>
             }
 
 
-        });
+        });*/
     }
 }
