@@ -1,8 +1,6 @@
 package com.hfm.vdc;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,12 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import java.util.List;
-
-import co.dift.ui.SwipeToAction;
-
 public class DBListActivity extends AppCompatActivity {
+    private final int REQUEST_TO_WRITE_EXCEL_FILE = 2017;
     Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +35,16 @@ public class DBListActivity extends AppCompatActivity {
                 writeExcel();
             }
         });
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
+
     private void writeExcel(){
         boolean grant=checkWritingPermission(REQUEST_TO_WRITE_EXCEL_FILE);
         if (grant)
@@ -48,7 +52,6 @@ public class DBListActivity extends AppCompatActivity {
 
     }
 
-    private final int REQUEST_TO_WRITE_EXCEL_FILE=2017;
     private  boolean checkWritingPermission(int reqcode){
         int permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if(permissionCheck== PackageManager.PERMISSION_GRANTED) return true;
