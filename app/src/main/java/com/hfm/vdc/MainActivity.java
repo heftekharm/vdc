@@ -82,21 +82,33 @@ public class MainActivity extends AppCompatActivity {
         person.setPhone(binding.editTextPhone.getText().toString());
     }
     public void add(View v){
+        try {
         setDataOnPerson();
         SugarPerson sugarPerson =new SugarPerson(person);
         sugarPerson.save();
         person.clear();
-        Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "اضافه شد", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "مشکلی رخ داد", Toast.LENGTH_SHORT).show();
+        }
     }
     public void correct(View v){
-        setDataOnPerson();
-        SugarPerson sugarPerson =new SugarPerson(person);
-        sugarPerson.setId(person.getDbId());
-        sugarPerson.save();
+        try {
+            setDataOnPerson();
+            SugarPerson sugarPerson = new SugarPerson(person);
+            sugarPerson.setId(person.getDbId());
+            sugarPerson.save();
+            Toast.makeText(this, "تغییرات ثبت شد", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "مشکلی رخ داد", Toast.LENGTH_SHORT).show();
+        }
+
     }
     public void remove(View v){
-        SugarPerson.findById(SugarPerson.class,person.getDbId()).delete();
+        if (SugarPerson.findById(SugarPerson.class, person.getDbId()).delete())
+            Toast.makeText(this, "حذف شد", Toast.LENGTH_SHORT).show();
         person.clear();
+
     }
 
     @Override
