@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,7 +19,6 @@ import com.hfm.vdc.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     Person person;
     ActivityMainBinding binding;
-    //EditText editText_fname,editText_lname,editText_age,editText_edu,editText_organ,editText_job,editText_phone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,DBListActivity.class);
-                startActivityForResult(intent,Statics.REQ_RECORD_ID);
+                goToNextActivity();
             }
         });
         ((AppCompatButton)findViewById(R.id.button_correct)).setOnClickListener(new View.OnClickListener() {
@@ -59,9 +60,18 @@ public class MainActivity extends AppCompatActivity {
                     remove(v);
                 }
             });
+        ((AppCompatImageButton)findViewById(R.id.clear_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                person.clear();
+            }
+        });
 
     }
-
+    private void goToNextActivity(){
+        Intent intent=new Intent(MainActivity.this,DBListActivity.class);
+        startActivityForResult(intent,Statics.REQ_RECORD_ID);
+    }
     private void setDataOnPerson(){
         person.setFname(binding.editTextFname.getText().toString());
         person.setLname(binding.editTextLname.getText().toString());
@@ -87,6 +97,28 @@ public class MainActivity extends AppCompatActivity {
     public void remove(View v){
         SugarPerson.findById(SugarPerson.class,person.getDbId()).delete();
         person.clear();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getGroupId()){
+            case R.id.action_observe_db:
+                goToNextActivity();
+                return true;
+            case R.id.action_clear_fields:
+                person.clear();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
     }
 
     @Override

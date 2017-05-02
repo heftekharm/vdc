@@ -12,6 +12,9 @@
     <string name="add">اضافه</string>
     <string name="edit"> ویرایش </string>
     <string name="correct">ثبت تغییرات</string>
+    <string name="title_main_activity">فرم ثبت اطلاعات بازدیدکنندگان</string>
     <string name="title_activity_dbcontent"> پایگاه داده </string>
+    <string name="action_observe_db">مشاهده بانک</string>
+    <string name="action_clear_fields">پاک کردن همه فیلدها</string>
 
 </resources>
