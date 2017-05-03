@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
     public void remove(View v){
         if (SugarPerson.findById(SugarPerson.class, person.getDbId()).delete())
             Toast.makeText(this, "حذف شد", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "مشکلی رخ داد", Toast.LENGTH_SHORT).show();
         person.clear();
 
     }

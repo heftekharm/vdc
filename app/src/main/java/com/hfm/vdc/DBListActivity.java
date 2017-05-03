@@ -23,11 +23,7 @@ public class DBListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dblist);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final RecyclerView dataListRecycleView= (RecyclerView) findViewById(R.id.recycleView_datalist);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        dataListRecycleView.setLayoutManager(linearLayoutManager);
-        dataListRecycleView.setHasFixedSize(true);
-        new AsyncTaskLoadingFromDB(this,dataListRecycleView).execute();
+        perpareRecycleView();
         FloatingActionButton save_as_excel = (FloatingActionButton) findViewById(R.id.save_as_excel);
         save_as_excel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +39,17 @@ public class DBListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void perpareRecycleView() {
+        final RecyclerView dataListRecycleView = (RecyclerView) findViewById(R.id.recycleView_datalist);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        dataListRecycleView.setLayoutManager(linearLayoutManager);
+        dataListRecycleView.setHasFixedSize(true);
+        dataListRecycleView.setNestedScrollingEnabled(false);
+        new AsyncTaskLoadingFromDB(this, dataListRecycleView).execute();
     }
 
     private void writeExcel(){
