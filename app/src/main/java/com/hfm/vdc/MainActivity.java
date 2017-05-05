@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         person.setOrgan(binding.editTextOrgan.getText().toString());
         person.setJob(binding.editTextJob.getText().toString());
         person.setPhone(binding.editTextPhone.getText().toString());
+        person.setEmail(binding.editTextEmail.getText().toString());
     }
     public void add(View v){
         try {
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             case Statics.REQ_RECORD_ID:
                 if(resultCode== Activity.RESULT_OK){
                     SugarPerson sugarPerson=SugarPerson.findById(SugarPerson.class,data.getLongExtra(Statics.ITEM_ID_RETURNED_BY_SWIPE_RIGHT,0));
-                    person.chageFieldsBySugarPerson(sugarPerson);
+                    person.changeFieldsBySugarPerson(sugarPerson);
                 }
 
 

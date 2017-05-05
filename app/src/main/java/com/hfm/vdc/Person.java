@@ -2,7 +2,7 @@ package com.hfm.vdc;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import com.hfm.vdc.BR;
+
 import com.orm.dsl.Table;
 
 /**
@@ -10,7 +10,6 @@ import com.orm.dsl.Table;
  */
 @Table
 public class Person extends BaseObservable {
-    //final String add="اضافه",update="تصحیح", remove="حذف";
     private long dbId =-1;
     private String fname="";
     private String lname="";
@@ -19,9 +18,19 @@ public class Person extends BaseObservable {
     private String organ="";
     private String job="";
     private String phone="";
+    private String email = "";
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+
+    }
 
     public void clear(){
-        fname=lname=age=edu=organ=job=phone="";
+        fname = lname = age = edu = organ = job = phone = email = "";
         dbId=-1;
         notifyChange();
     }
@@ -107,7 +116,8 @@ public class Person extends BaseObservable {
         notifyPropertyChanged(BR.dbId);
 
     }
-    public void chageFieldsBySugarPerson(SugarPerson sugarPerson){
+
+    public void changeFieldsBySugarPerson(SugarPerson sugarPerson) {
 
         edu=sugarPerson.edu;
         lname=sugarPerson.lname;
@@ -117,6 +127,7 @@ public class Person extends BaseObservable {
         age=sugarPerson.age;
         organ=sugarPerson.organ;
         phone=sugarPerson.phone;
+        email = sugarPerson.email;
         notifyChange();
 
     }

@@ -5,7 +5,7 @@
     <string name="lname">نام خانوادگی</string>
     <string name="age">سن</string>
     <string name="education">تحصیلات</string>
-    <string name="organization">سازمان</string>
+    <string name="organization">پست سازمانی</string>
     <string name="job">محل کار</string>
     <string name="phoneNumber">شماره تلفن</string>
     <string name="remove">حذف</string>
@@ -16,5 +16,6 @@
     <string name="title_activity_dbcontent"> پایگاه داده </string>
     <string name="action_observe_db">مشاهده بانک</string>
     <string name="action_clear_fields">پاک کردن همه فیلدها</string>
+    <string name="emailAddress">ایمیل</string>
 
 </resources>

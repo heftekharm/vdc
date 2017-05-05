@@ -8,8 +8,6 @@
         <variable
             name="person"
             type="com.hfm.vdc.Person" />
-
-        <import type="com.hfm.vdc.Person" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -148,6 +146,19 @@
                 android:inputType="text"
                 android:lines="1"
                 android:text="@{person.job}" />
+            <EditText
+                android:id="@+id/editText_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/editText_job"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ic_email_black_24dp"
+                android:ems="10"
+                android:hint="@string/emailAddress"
+                android:inputType="textEmailAddress"
+                android:text="@{person.email}" />
 
             <EditText
                 android:id="@+id/editText_phone"
@@ -155,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/editText_job"
+                android:layout_below="@+id/editText_email"
                 android:drawablePadding="5dp"
                 android:drawableRight="@drawable/ic_call_black_24dp"
                 android:ems="10"

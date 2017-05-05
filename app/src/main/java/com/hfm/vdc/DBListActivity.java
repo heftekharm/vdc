@@ -46,6 +46,7 @@ public class DBListActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
         dataListRecycleView.setLayoutManager(linearLayoutManager);
         dataListRecycleView.setHasFixedSize(true);
         dataListRecycleView.setNestedScrollingEnabled(false);

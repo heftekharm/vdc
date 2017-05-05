@@ -1,7 +1,5 @@
 package com.hfm.vdc;
 
-import android.content.Context;
-
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
@@ -17,6 +15,7 @@ public class SugarPerson extends SugarRecord {
     public String organ;
     public String job;
     public String phone;
+    public String email;
 
     public SugarPerson(){
     }
@@ -28,6 +27,7 @@ public class SugarPerson extends SugarRecord {
         organ=person.getOrgan();
         job=person.getJob();
         phone=person.getPhone();
+        email = person.getEmail();
     }
 
 }
