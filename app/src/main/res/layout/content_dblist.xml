@@ -8,7 +8,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DBListActivity"
     tools:showIn="@layout/activity_dblist">
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleView_datalist"
             android:layout_width="match_parent"

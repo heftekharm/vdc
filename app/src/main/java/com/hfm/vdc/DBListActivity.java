@@ -11,10 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 public class DBListActivity extends AppCompatActivity {
     private final int REQUEST_TO_WRITE_EXCEL_FILE = 2017;
+    private final int REQUEST_TO_SHARE_EXCEL_FILE = 2018;
+
     Adapter adapter;
 
     @Override
@@ -23,6 +27,7 @@ public class DBListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dblist);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // CollapsingToolbarLayout collapsingToolbarLayout= (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         perpareRecycleView();
         FloatingActionButton save_as_excel = (FloatingActionButton) findViewById(R.id.save_as_excel);
         save_as_excel.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +65,12 @@ public class DBListActivity extends AppCompatActivity {
 
     }
 
+    private void shareExcel() {
+        boolean grant = checkWritingPermission(REQUEST_TO_SHARE_EXCEL_FILE);
+        if (grant)
+            Exceler.ShareExcel(this);
+    }
+
     private  boolean checkWritingPermission(int reqcode){
         int permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if(permissionCheck== PackageManager.PERMISSION_GRANTED) return true;
@@ -78,7 +89,34 @@ public class DBListActivity extends AppCompatActivity {
                     writeExcel();
                 }
             }
+            case REQUEST_TO_SHARE_EXCEL_FILE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    shareExcel();
+                }
+            }
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_dbcontent, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save_excel:
+                writeExcel();
+                break;
+            case R.id.action_share_excel:
+                shareExcel();
+                break;
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }

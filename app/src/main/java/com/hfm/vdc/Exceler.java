@@ -1,8 +1,11 @@
 package com.hfm.vdc;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import java.io.File;
@@ -22,16 +25,48 @@ import jxl.write.biff.RowsExceededException;
  */
 public class Exceler  {
 
-    public static void WriteExcel(Context context) {
-        new AsyncExceler(context).execute();
+    public static void WriteExcel(Activity activity) {
+        new AsyncExceler(activity, null).execute();
     }
+
+    public static void ShareExcel(Activity activity) {
+        new AsyncExceler(activity, new RunAfterAsync() {
+            @Override
+            public void run(AsyncExceler asyncExceler) {
+                Intent intent = ShareCompat.IntentBuilder.from(asyncExceler.getActivity()).setType("application/vnd.ms-excel").setStream(asyncExceler.getsavePathFileUri()).setChooserTitle("مسیر فرستادن فایل").getIntent();
+                if (intent.resolveActivity(asyncExceler.getActivity().getPackageManager()) != null) {
+                    asyncExceler.getActivity().startActivity(intent);
+                }
+            }
+        }).execute();
+    }
+
+    static interface RunAfterAsync {
+        void run(AsyncExceler asyncExceler);
+    }
+
     static class AsyncExceler extends AsyncTask<Void,Void,Exception>{
         StringBuilder successMessag;
-        private Context context;
+        RunAfterAsync runInPostExecute;
+        private Activity activity;
         private File savePathFile;
-        public AsyncExceler(Context context){
-            this.context=context;
+
+        public AsyncExceler(Activity activity, RunAfterAsync runInPostExecute) {
+            this.activity = activity;
+            this.runInPostExecute = runInPostExecute;
         }
+
+        public Activity getActivity() {
+            return activity;
+        }
+
+        ;
+
+        public Uri getsavePathFileUri() {
+            return savePathFile != null ? Uri.fromFile(savePathFile) : null;
+        }
+
+        ;
         @Override
         protected Exception doInBackground(Void... params) {
             Iterator<SugarPerson> iterator=SugarPerson.findAll(SugarPerson.class);
@@ -74,9 +109,12 @@ public class Exceler  {
         @Override
         protected void onPostExecute(Exception e) {
             if(e!=null){
-                Toast.makeText(context, new StringBuilder("مانعی وجود دارد!"), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, new StringBuilder("مانعی وجود دارد!"), Toast.LENGTH_LONG).show();
             }else{
-                Toast.makeText(context, successMessag.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, successMessag.toString(), Toast.LENGTH_LONG).show();
+                if (runInPostExecute != null) {
+                    runInPostExecute.run(this);
+                }
             }
         }
     }
